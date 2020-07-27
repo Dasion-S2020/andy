@@ -1,0 +1,226 @@
+TensorFlow 2.0 Upgrade Script
+-----------------------------
+Converted 5 files
+Detected 17 issues that require attention
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+File: ./stock/model.py
+--------------------------------------------------------------------------------
+./stock/model.py:110:24: WARNING: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib.rnn. (Manual edit required) tf.contrib.rnn.* has been deprecated, and widely used cells/functions will be moved to tensorflow/addons repository. Please check it there and file Github issues if necessary.
+./stock/model.py:110:24: ERROR: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib. tf.contrib.rnn.DropoutWrapper cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./stock/model.py:200:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+./stock/model.py:209:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+./stock/model.py:210:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+./stock/model.py:211:20: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+./stock/model.py:428:24: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./stock/model.py:450:16: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./stock/model.py:561:24: WARNING: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib.rnn. (Manual edit required) tf.contrib.rnn.* has been deprecated, and widely used cells/functions will be moved to tensorflow/addons repository. Please check it there and file Github issues if necessary.
+./stock/model.py:561:24: ERROR: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib. tf.contrib.rnn.DropoutWrapper cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+./stock/model.py:671:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+./stock/model.py:680:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+./stock/model.py:681:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+./stock/model.py:682:20: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+./stock/model.py:878:24: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+./stock/model.py:896:16: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+--------------------------------------------------------------------------------
+File: ./stock/stock_data.py
+--------------------------------------------------------------------------------
+./stock/stock_data.py:193:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+================================================================================
+Detailed log follows:
+
+================================================================================
+================================================================================
+Input tree: './stock'
+================================================================================
+--------------------------------------------------------------------------------
+Processing file './stock/general_utils.py'
+ outputting to './stock_upgraded/general_utils.py'
+--------------------------------------------------------------------------------
+
+14:15: INFO: Added keywords to args of function 'tf.cond'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file './stock/vgg.py'
+ outputting to './stock_upgraded/vgg.py'
+--------------------------------------------------------------------------------
+
+24:17: INFO: `name` passed to `name_scope`. Because you may be re-entering an existing scope, it is not safe to convert automatically,  the v2 name_scope does not support re-entering scopes by name.
+
+24:17: INFO: Renamed 'tf.name_scope' to 'tf.compat.v1.name_scope'
+25:27: INFO: Renamed 'tf.layers.conv2d' to 'tf.compat.v1.layers.conv2d'
+38:17: INFO: `name` passed to `name_scope`. Because you may be re-entering an existing scope, it is not safe to convert automatically,  the v2 name_scope does not support re-entering scopes by name.
+
+38:17: INFO: Renamed 'tf.name_scope' to 'tf.compat.v1.name_scope'
+39:29: INFO: Renamed 'tf.layers.max_pooling2d' to 'tf.compat.v1.layers.max_pooling2d'
+278:19: INFO: Renamed 'tf.layers.dropout' to 'tf.compat.v1.layers.dropout'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file './stock/__init__.py'
+ outputting to './stock_upgraded/__init__.py'
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file './stock/model.py'
+ outputting to './stock_upgraded/model.py'
+--------------------------------------------------------------------------------
+
+103:24: INFO: Renamed 'tf.contrib.rnn.LSTMCell' to 'tf.compat.v1.nn.rnn_cell.LSTMCell'
+105:24: INFO: Renamed 'tf.contrib.rnn.GRUCell' to 'tf.compat.v1.nn.rnn_cell.GRUCell'
+110:24: WARNING: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib.rnn. (Manual edit required) tf.contrib.rnn.* has been deprecated, and widely used cells/functions will be moved to tensorflow/addons repository. Please check it there and file Github issues if necessary.
+110:24: ERROR: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib. tf.contrib.rnn.DropoutWrapper cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+114:30: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+115:30: INFO: Renamed 'tf.layers.dropout' to 'tf.compat.v1.layers.dropout'
+120:30: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+121:30: INFO: Renamed 'tf.layers.dropout' to 'tf.compat.v1.layers.dropout'
+129:20: INFO: Added keywords to args of function 'tf.reduce_mean'
+129:35: INFO: Changing labels arg of tf.nn.softmax_cross_entropy_with_logits to tf.stop_gradient(labels). Please check this transformation.
+
+131:57: INFO: Renamed 'tf.trainable_variables' to 'tf.compat.v1.trainable_variables'
+132:25: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+136:25: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+138:37: INFO: Added keywords to args of function 'tf.argmax'
+138:62: INFO: Added keywords to args of function 'tf.argmax'
+139:24: INFO: Added keywords to args of function 'tf.reduce_mean'
+142:15: INFO: Renamed 'tf.contrib.rnn.MultiRNNCell' to 'tf.compat.v1.nn.rnn_cell.MultiRNNCell'
+148:26: INFO: Renamed 'tf.nn.dynamic_rnn' to 'tf.compat.v1.nn.dynamic_rnn'
+152:18: INFO: Added keywords to args of function 'tf.transpose'
+159:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+160:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+161:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+162:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+166:20: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+170:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+173:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+174:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+175:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+192:24: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+194:24: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+199:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+200:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+200:16: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+200:77: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+208:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+209:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+209:16: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+209:77: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+210:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+210:16: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+210:64: INFO: tf.constant_initializer requires manual check. Initializers no longer have the dtype argument in the constructor or partition_info argument in the __call__ method.
+The calls have been converted to compat.v1 for safety (even though they may already have been correct).
+210:64: INFO: Renamed 'tf.constant_initializer' to 'tf.compat.v1.constant_initializer'
+211:20: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+211:20: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+211:75: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+218:22: INFO: Added keywords to args of function 'tf.reduce_sum'
+223:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+226:32: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+229:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+230:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+231:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+261:20: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+265:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+268:32: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+271:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+272:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+273:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+289:19: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+290:21: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+334:16: INFO: Renamed 'tf.train.Saver' to 'tf.compat.v1.train.Saver'
+343:15: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+428:24: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+450:16: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+554:24: INFO: Renamed 'tf.contrib.rnn.LSTMCell' to 'tf.compat.v1.nn.rnn_cell.LSTMCell'
+556:24: INFO: Renamed 'tf.contrib.rnn.GRUCell' to 'tf.compat.v1.nn.rnn_cell.GRUCell'
+561:24: WARNING: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib.rnn. (Manual edit required) tf.contrib.rnn.* has been deprecated, and widely used cells/functions will be moved to tensorflow/addons repository. Please check it there and file Github issues if necessary.
+561:24: ERROR: Using member tf.contrib.rnn.DropoutWrapper in deprecated module tf.contrib. tf.contrib.rnn.DropoutWrapper cannot be converted automatically. tf.contrib will not be distributed with TensorFlow 2.0, please consider an alternative in non-contrib TensorFlow, a community-maintained repository such as tensorflow/addons, or fork the required code.
+565:30: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+566:30: INFO: Renamed 'tf.layers.dropout' to 'tf.compat.v1.layers.dropout'
+571:30: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+572:30: INFO: Renamed 'tf.layers.dropout' to 'tf.compat.v1.layers.dropout'
+580:20: INFO: Added keywords to args of function 'tf.reduce_mean'
+582:57: INFO: Renamed 'tf.trainable_variables' to 'tf.compat.v1.trainable_variables'
+583:25: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+587:25: INFO: Renamed 'tf.train.AdamOptimizer' to 'tf.compat.v1.train.AdamOptimizer'
+590:15: INFO: Renamed 'tf.contrib.rnn.MultiRNNCell' to 'tf.compat.v1.nn.rnn_cell.MultiRNNCell'
+596:26: INFO: Renamed 'tf.nn.dynamic_rnn' to 'tf.compat.v1.nn.dynamic_rnn'
+600:18: INFO: Added keywords to args of function 'tf.transpose'
+607:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+608:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+609:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+610:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+614:20: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+620:24: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+622:28: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+626:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+627:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+628:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+629:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+634:20: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+641:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+644:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+645:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+646:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+663:24: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+665:24: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+670:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+671:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+671:16: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+671:77: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+679:13: INFO: Renamed 'tf.variable_scope' to 'tf.compat.v1.variable_scope'
+680:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+680:16: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+680:77: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+681:16: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+681:16: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+681:64: INFO: tf.constant_initializer requires manual check. Initializers no longer have the dtype argument in the constructor or partition_info argument in the __call__ method.
+The calls have been converted to compat.v1 for safety (even though they may already have been correct).
+681:64: INFO: Renamed 'tf.constant_initializer' to 'tf.compat.v1.constant_initializer'
+682:20: WARNING: tf.get_variable requires manual check. tf.get_variable returns ResourceVariables by default in 2.0, which have well-defined semantics and are stricter about shapes. You can disable this behavior by passing use_resource=False, or by calling tf.compat.v1.disable_resource_variables().
+682:20: INFO: Renamed 'tf.get_variable' to 'tf.compat.v1.get_variable'
+682:75: INFO: Changing tf.contrib.layers xavier initializer to a tf.compat.v1.keras.initializers.VarianceScaling and converting arguments.
+
+689:22: INFO: Added keywords to args of function 'tf.reduce_sum'
+694:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+697:32: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+700:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+701:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+702:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+735:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+738:32: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+741:22: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+742:29: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+743:41: INFO: Renamed 'tf.placeholder' to 'tf.compat.v1.placeholder'
+759:19: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+760:21: INFO: Renamed 'tf.layers.dense' to 'tf.compat.v1.layers.dense'
+794:16: INFO: Renamed 'tf.train.Saver' to 'tf.compat.v1.train.Saver'
+802:15: INFO: Renamed 'tf.global_variables_initializer' to 'tf.compat.v1.global_variables_initializer'
+878:24: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+896:16: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+937:4: INFO: Renamed 'tf.reset_default_graph' to 'tf.compat.v1.reset_default_graph'
+938:9: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Processing file './stock/stock_data.py'
+ outputting to './stock_upgraded/stock_data.py'
+--------------------------------------------------------------------------------
+
+193:12: WARNING: *.save requires manual check. (This warning is only applicable if the code saves a tf.Keras model) Keras model.save now saves to the Tensorflow SavedModel format by default, instead of HDF5. To continue saving to HDF5, add the argument save_format='h5' to the save() function.
+401:22: INFO: Renamed 'tf.GPUOptions' to 'tf.compat.v1.GPUOptions'
+402:17: INFO: Renamed 'tf.ConfigProto' to 'tf.compat.v1.ConfigProto'
+404:17: INFO: Renamed 'tf.ConfigProto' to 'tf.compat.v1.ConfigProto'
+407:4: INFO: Renamed 'tf.reset_default_graph' to 'tf.compat.v1.reset_default_graph'
+408:9: INFO: Renamed 'tf.Session' to 'tf.compat.v1.Session'
+--------------------------------------------------------------------------------
+
