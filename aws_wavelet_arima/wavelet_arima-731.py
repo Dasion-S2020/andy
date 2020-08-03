@@ -42,7 +42,7 @@ for i in range(len_test):
     detail = []
     for detail_series in detail:
         detail_model = ARIMA(detail_series, order=detail_order)
-        detail_model_fit = model.fit(disp=0)
+        detail_model_fit = detail_model.fit(disp=0)
         yhat_detail = detail_model_fit.forecast()[0]
         detail.append(yhat_detail)
 
