@@ -17,7 +17,7 @@ train = np.array(data[:train_n])
 test = np.array(data[train_n:])
 test_n = data.shape[0]//5
 
-smooth_order = (10, 1, 1)
+smooth_order = (5, 1, 1)
 detail_order = (1, 1, 0)
 
 history = [x for x in train]
