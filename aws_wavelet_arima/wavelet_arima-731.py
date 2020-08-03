@@ -34,10 +34,15 @@ for i in range(len_test):
     smooth = c[6]
 
     #predict next term in smooth series
-    model = ARIMA(smooth, order=smooth_order)
-    model_fit = model.fit(disp=0)
-    yhat_smooth = model_fit.forecast()[0]
-
+    try:
+        model = ARIMA(smooth, order=smooth_order)
+        model_fit = model.fit(disp=0)
+        yhat_smooth = model_fit.forecast()[0]
+    except Exception:
+        model = ARIMA(smooth, order=(1,1,0))
+        model_fit = model.fit(disp=0)
+        yhat_smooth = model_fit.forecast()[0]
+        
     #predict next term in each detail series
     detail = []
     for detail_series in detail:
