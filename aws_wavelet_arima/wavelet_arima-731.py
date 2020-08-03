@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from modwt import modwt, modwtmra
 from sklearn import preprocessing
-from statsmodels.tsa.arima_model import ARIMA
+from statsmodels.tsa.arima.model import ARIMA
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import math
 
@@ -17,8 +17,8 @@ train = np.array(data[:train_n])
 test = np.array(data[train_n:])
 test_n = data.shape[0]//5
 
-smooth_order = (10, 1, 1)
-detail_order = (1, 1, 0)
+smooth_order = (10,1,1)
+detail_order = (1,1,0)
 
 history = [x for x in train]
 predictions = []
@@ -34,15 +34,15 @@ for i in range(len_test):
     smooth = c[6]
 
     #predict next term in smooth series
-    model = ARIMA(smooth, order=smooth_order)
+    model = ARIMA(smooth, order=smooth_order, enforce_stationarity=True, enforce_invertibility=True)
     model_fit = model.fit(disp=0)
     yhat_smooth = model_fit.forecast()[0]
 
     #predict next term in each detail series
     detail = []
     for detail_series in detail:
-        detail_model = ARIMA(detail_series, order=detail_order)
-        detail_model_fit = model.fit(disp=0)
+        detail_model = ARIMA(detail_series, order=detail_order, enforce_stationarity=True, enforce_invertibility=True)
+        detail_model_fit = detail_model.fit(disp=0)
         yhat_detail = detail_model_fit.forecast()[0]
         detail.append(yhat_detail)
 
