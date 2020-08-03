@@ -34,6 +34,8 @@ def train_arima(train, test, order):
     history = [x for x in train]
     predictions = []
 
+    len_test = len(test)
+
     for i in range(len_test):
 
         print(str(i+1) + "/" + str(len_test))
