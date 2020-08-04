@@ -11,7 +11,7 @@ from pmdarima.arima import ndiffs
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import math
 
-df = pd.read_csv('/Users/andyliu/develop/andy/aapl_indicators_yahoo.csv')
+df = pd.read_csv('./aapl_indicators_yahoo.csv')
 data = df['Close']
 
 train_n = data.shape[0]*4//5
