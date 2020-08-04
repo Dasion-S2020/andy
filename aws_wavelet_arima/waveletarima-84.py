@@ -37,10 +37,10 @@ def num_diffs(y_train):
     n_diffs = max(adf_diffs, kpss_diffs)
     return(n_diffs)
 
-smooth_auto = pmdarima.auto_arima(smooth_train, d=num_diffs(smooth_train), seasonal=False, stepwise=True, suppress_warnings=True, max_p=20, trace=False, error_action='ignore')
+smooth_auto = pmdarima.auto_arima(smooth_train, d=num_diffs(smooth_train), seasonal=False, stepwise=True, suppress_warnings=True, max_p=20, trace=2, error_action='ignore')
 detail_models = []
 for detail_series in detail_train:
-    detail_auto = pmdarima.auto_arima(detail_series, d=num_diffs(detail_series), seasonal=False, stepwise=True, suppress_warnings=True, max_p=6, trace=False, error_action='ignore')
+    detail_auto = pmdarima.auto_arima(detail_series, d=num_diffs(detail_series), seasonal=False, stepwise=True, suppress_warnings=True, max_p=6, trace=2, error_action='ignore')
     detail_models.append(detail_auto)
 
 def arima_train(train, test, arima, max_p):
