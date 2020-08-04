@@ -92,4 +92,6 @@ mse = mean_squared_error(actual, pred)
 rmse = math.sqrt(mse)
 mae = mean_absolute_error(actual, pred)
 mape = mean_absolute_percentage_error(actual, pred)
+with open("./results.txt","w") as f:
+    f.write("mse, rmse, mae, mape:" + str((mse,rmse,mae,mape)))
 print("mse, rmse, mae, mape:" + str((mse,rmse,mae,mape)))
