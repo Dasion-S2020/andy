@@ -126,12 +126,12 @@ def HFCM_ridge(dataset1, ratio=0.7, plot_flag=False):
     validation_ratio = 0.2
     len_validation_data = int(len_train_data * validation_ratio)
 
-    small_alpha = [1e-12, 1e-14, 1e-20]
+    small_alpha = np.linspace(1e-15, 0.1, 20)
     # small_alpha = [1e-20]
     # small_alpha = np.linspace(1e-15, 0.1, 20)
     # small_alpha = [1e-20]
     Order_list = list(range(2, 9))
-    Nc_list = list(range(2, 8))
+    Nc_list = list(range(2, 9))
     # alpha_list = np.hstack((small_alpha, np.linspace(0.1, 15, 30)))
     alpha_list = small_alpha
     # rmse_total = np.zeros(shape=(len(Nc_list), len(Order_list)))
@@ -515,7 +515,7 @@ def analyze_paras_HFCM(dataset1, ratio, sp):
     return df
 
 
-# analyze hyper-parameters on the performance on Wavelet-HFCM
+# analyze hyper-parameters on the performance on Wavelet-
 def analyze_parameter():
     import seaborn as sns
     plt.style.use(['ggplot', 'seaborn-paper'])
@@ -652,12 +652,12 @@ def main():
     # ratio = 0.75
 
     # # dataset 4:  co2-ppm-mauna-loa-19651980.csv  #todo:  good
-    dateparse = lambda x: pd.datetime.strptime(x, '%Y-%m')  # %Y-%m-%d
-    sunspot = pd.read_csv(r'./datasets/co2-ppm-mauna-loa-19651980.csv', delimiter=',', parse_dates=[0],
-                          date_parser=dateparse).as_matrix()
-    dataset = sunspot[:, 1].astype(np.float)
-    time = sunspot[:, 0]
-    ratio = 0.85
+    #dateparse = lambda x: pd.datetime.strptime(x, '%Y-%m')  # %Y-%m-%d
+    #sunspot = pd.read_csv(r'./datasets/co2-ppm-mauna-loa-19651980.csv', delimiter=',', parse_dates=[0],
+    #date_parser=dateparse).as_matrix()
+    #dataset = sunspot[:, 1].astype(np.float)
+    #time = sunspot[:, 0]
+    #ratio = 0.85
 
 
     # dataset 5: monthly-lake-erie-levels-1921-19.csv #todo:  good
@@ -679,22 +679,20 @@ def main():
     #
     #
     # # # # data set 2 : MG chaos( even use 10% data as train data)
-    import scipy.io as sio
-    dataset = sio.loadmat('./datasets/MG_chaos.mat')['dataset'].flatten()
+    #import scipy.io as sio
+    #dataset = sio.loadmat('./datasets/MG_chaos.mat')['dataset'].flatten()
     # only use data from t=124 : t=1123  (all data previous are not in the same pattern!)
-    dataset = dataset[123:1123]
-    time = range(len(dataset))
-    ratio = 0.5
+    #dataset = dataset[123:1123]
+    #time = range(len(dataset))
+    #ratio = 0.5
 
     # data set 3 : sp500 index
-    # sp500_src = "./datasets/sp500.csv"
-    # dateparse = lambda x: pd.datetime.strptime(x, '%Y-%m-%d')
-    # sp500 = pd.read_csv(sp500_src, delimiter=',', parse_dates=[0], date_parser=dateparse).as_matrix()
-    # dataset = np.array(sp500[:, 1], dtype=np.float)
-    # time = sp500[:, 0]
-    # ratio = 0.6
-
-
+    sp500_src = "./datasets/sp500.csv"
+    dateparse = lambda x: pd.datetime.strptime(x, '%Y-%m-%d')
+    sp500 = pd.read_csv(sp500_src, delimiter=',', parse_dates=[0], date_parser=dateparse).as_matrix()
+    dataset = np.array(sp500[:, 1], dtype=np.float)
+    time = sp500[:, 0]
+    ratio = 0.6
 
     # partition dataset into train set and test set
     length = len(dataset)
@@ -706,7 +704,6 @@ def main():
 
     # perform prediction
     data_predicted, best_Order, best_Nc, best_alpha = HFCM_ridge(dataset, ratio)
-
 
     # Outcomes
     # Error of the whole dataset
