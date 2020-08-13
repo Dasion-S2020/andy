@@ -123,15 +123,15 @@ def HFCM_ridge(dataset1, ratio=0.7, plot_flag=False):
     len_test_data = len(test_data)
     # grid search
     # best parameters
-    validation_ratio = 0.2
+    validation_ratio = 0.1
     len_validation_data = int(len_train_data * validation_ratio)
 
     small_alpha = np.linspace(1e-15, 0.1, 20)
     # small_alpha = [1e-20]
     # small_alpha = np.linspace(1e-15, 0.1, 20)
     # small_alpha = [1e-20]
-    Order_list = list(range(2, 9))
-    Nc_list = list(range(2, 9))
+    Order_list = list(range(2, 10))
+    Nc_list = list(range(2, 11))
     # alpha_list = np.hstack((small_alpha, np.linspace(0.1, 15, 30)))
     alpha_list = small_alpha
     # rmse_total = np.zeros(shape=(len(Nc_list), len(Order_list)))
