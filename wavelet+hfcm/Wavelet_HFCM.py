@@ -1,4 +1,5 @@
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 from FCMs import transferFunc, reverseFunc
 import pandas as pd
@@ -145,7 +146,9 @@ def HFCM_ridge(dataset1, ratio=0.7, plot_flag=False):
     best_W_learned_inall = None
     best_steepness_inall = None
     best_predict_inall = np.zeros(shape=len_train_data)
-
+    
+    heatmap_dict = {}
+    
     for Oidx, Order in enumerate(Order_list):
         for Nidx, Nc in enumerate(Nc_list):
             # min_rmse 用于记录每个(Order, Nc)下的最小的rmse（优化alpha ）
@@ -247,6 +250,10 @@ def HFCM_ridge(dataset1, ratio=0.7, plot_flag=False):
 
                 print("Nc -> %d, Order -> %d, alpha -> %g: rmse -> %f  | min_rmse is %f, min_rmse_inall is %f (%d, %d)"
                       % (Nc, Order, alpha, rmse, min_rmse, min_rmse_inall, best_Nc, best_Order))
+                
+                #update heatmapdict with new info
+                
+                
                 # use rmse as performance index
                 if rmse < min_rmse:
                     min_rmse = rmse
@@ -257,6 +264,7 @@ def HFCM_ridge(dataset1, ratio=0.7, plot_flag=False):
                     best_alpha = alpha
             # 记录当前(Nc, Order)下的最优 alpha
             best_alpha_inall[Nidx, Oidx] = best_alpha
+            heatmap_dict[(Nc, Order)] = min_rmse
             # 判断当前的(Nc, Order)下，全局rmse是否减小
             if min_rmse < min_rmse_inall:
                 min_rmse_inall = min_rmse
@@ -323,10 +331,16 @@ def HFCM_ridge(dataset1, ratio=0.7, plot_flag=False):
         data_predicted = np.hstack((best_predict_inall, new_testPredict))
         data_predicted = re_normalize(data_predicted, maxV, minV, normalize_style)
 
-
-
-
-
+        #convert heatmapdict to nparray
+        heatmap_array = np.zeros((9,8))
+        for t in heatmap_dict.keys():
+            print(t)
+            n1 = int(t[0])-2
+            n2 = int(t[1])-2
+            heatmap_array[n1,n2] = heatmap_dict[t]
+        #create heatmap
+        heatmap = sns.heatmap(heatmap_array)
+        heatmap.figure.savefig('heatmap1.png')
         return data_predicted, best_Order, best_Nc, best_alpha_scala
 
 
