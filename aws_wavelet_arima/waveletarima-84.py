@@ -12,6 +12,8 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 import math
 import time
 import multiprocessing as mp
+from multiprocessing import set_start_method
+set_start_method("spawn")
 
 start = time.time()
 
