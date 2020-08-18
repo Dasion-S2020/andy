@@ -72,7 +72,8 @@ def arima_train(train, test, arima, max_p):
     return(predictions)
 
 if __name__ == '__main__':
-
+    set_start_method("spawn")
+    
     inputs1 = [(smooth_train, smooth_test, smooth_auto, 15)]
     for i in range(3):
         inputs1.append((detail_train[i], detail_test[i], detail_models[i], 5))
