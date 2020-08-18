@@ -84,14 +84,20 @@ class StockData(object):
         return j_item_tuple_list
 
     def _split_data(self):
+        #print(self.data.shape)
+        #print(self.data)
+        #print(type(self.data))
         # maybe we should write it like this
-        train_pos = int(self.train_percentage * self.data.shape[1])
-        val_pos = int(self.val_percentage * self.data.shape[1]) + train_pos
-
+        train_pos = int(self.train_percentage * self.data.shape[0])
+        val_pos = int(self.val_percentage * self.data.shape[0]) + train_pos
+        #print(train_pos)
+        #print(val_pos)
         self.train_index = list(range(0, train_pos - self.time_window - self.ahead_step + 1))
         self.val_index = list(range(train_pos - self.time_window - self.ahead_step + 1, val_pos - self.time_window - self.ahead_step + 1))
-        self.test_index = list(range(val_pos - self.time_window - self.ahead_step + 1, self.data.shape[1] - self.time_window - self.ahead_step + 1))
-
+        self.test_index = list(range(val_pos - self.time_window - self.ahead_step + 1, self.data.shape[0] - self.time_window - self.ahead_step + 1))
+        #print(self.train_index)
+        #print(self.val_index)
+        #print(self.test_index)
         # data normalization
         self.max_data = np.max(self.data, axis=1)
         self.min_data = np.min(self.data, axis=1)
@@ -232,7 +238,8 @@ class StockData(object):
 
     def _generate_batch_from_pre_compute(self, tuple_list):
         index_size = len(tuple_list)
-
+        print(index_size)
+        print(self.wavelet_x.shape)
         # the shape of batch_x, label
         batch_x = np.zeros([index_size, self.time_window, self.num_frequencies, self.num_wavelet_channels])
         label = np.zeros([index_size, self.num_classes])
@@ -241,6 +248,8 @@ class StockData(object):
         for tuple_i in tuple_list:
             j = tuple_i[0]
             item = tuple_i[1]
+            print(j,item)
+            print(batch_x.shape)
             batch_x[temp, :, :] = self.wavelet_x[j][item]
             if self.normalized_data[j][item + self.time_window + self.ahead_step - 1] >= self.normalized_data[j][item + self.time_window - 1]:
                 label[temp, 1] = 1.
@@ -265,6 +274,7 @@ class StockData(object):
 
     def validation(self):
         index = np.array(self.val_index)
+        #print("index:" + index)
         # logger.info("index max: {}, min: {}".format(np.max(index), np.min(index)))
         # logger.info("max y pos: {}".format(np.max(index) + self.time_window + self.ahead_step - 1))
         if self.wavelet_x is None:
@@ -474,7 +484,13 @@ if __name__ == "__main__":
             model_timestamp=model_timestamp
         )
 
+        print("stock_data:")
+        print(stock_data)
+
         test_pred, test_y, best_val_loss, best_val_acc, test_loss, test_acc = cnn_model.train(stock_data)
+
+        print("test_pred: " + str(type(test_pred)))
+        print("test_y: " + str(type(test_y)))
 
         # wavelet function
         notes = args.notes + "_wavelet_" + args.wavelet_function

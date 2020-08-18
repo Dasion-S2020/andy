@@ -272,7 +272,7 @@ class VGG(object):
 
         # flatten and dropout
         if not self.for_attention:
-            flat = Flatten(flat)
+            flat = Flatten()(flat)
             #flat = flatten(flat)
         logger.info("flat shape: {}".format(flat.shape))
 

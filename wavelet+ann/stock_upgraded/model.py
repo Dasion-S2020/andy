@@ -443,6 +443,9 @@ class WaveletAttentionNetwork(object):
                 #     self.learning_rate *= 0.1
 
             # evaluate each epoch
+            print(val_x)
+            print(val_y)
+            print(val_x_lstm)
             val_loss, val_pred, val_acc = self._calculate_loss(val_x, val_y, val_x_lstm)
             if val_loss < best_val_loss:
                 best_val_loss = val_loss

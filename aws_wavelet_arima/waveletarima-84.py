@@ -10,6 +10,10 @@ import pmdarima
 from pmdarima.arima import ndiffs
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import math
+import time
+import multiprocessing as mp
+
+start = time.time()
 
 df = pd.read_csv('./aapl_indicators_yahoo.csv')
 data = df['Close']
@@ -66,23 +70,37 @@ def arima_train(train, test, arima, max_p):
             
     return(predictions)
 
-smooth_pred = arima_train(smooth_train, smooth_test, smooth_auto, 15)
-detail_pred = []
-for i in range(len(detail_models)):
-    d = arima_train(detail_train[i], detail_test[i], detail_models[i], 5)
-    detail_pred.append(d)
+pool1 = mp.Pool(4)
+inputs1 = [(smooth_train, smooth_test, smooth_auto, 15)]
+for i in range(3):
+    inputs1.append((detail_train[i], detail_test[i], detail_models[i], 5))
+results1 = pool1.starmap(arima_train, inputs1)
+pool1.terminate()
 
-pred = np.array(smooth_pred)
-for i in detail_pred:
-    pred += np.array(i)
+pool2 = mp.Pool(3)
+inputs2 = []
+for i in range(3,6):
+    inputs2.append((detail_train[i], detail_test[i], detail_models[i], 5))
+results2 = pool2.starmap(arima_train, inputs2)
+pool2.terminate()
 
-np.save('./pred.npy', pred)
+pred = np.array(results1[0])
+for i in range(1,4):
+    pred += np.array(results1[i])
+for i in range(0,3):
+    pred += np.array(results2[i])
+
+np.save('./pred1.npy', pred)
+
+stop = time.time()
+
+print("Total Time: " + str((stop-start)/60) + " minutes")
 
 actual = test
 
 plt.plot(pred, color='r')
 plt.plot(actual, color='g')
-plt.savefig('./arima84.png')
+plt.savefig('./arima818.png')
 
 def mean_absolute_percentage_error(y_true, y_pred): 
     mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
@@ -95,3 +113,4 @@ mape = mean_absolute_percentage_error(actual, pred)
 with open("./results.txt","w") as f:
     f.write("mse, rmse, mae, mape:" + str((mse,rmse,mae,mape)))
 print("mse, rmse, mae, mape:" + str((mse,rmse,mae,mape)))
+
