@@ -71,49 +71,51 @@ def arima_train(train, test, arima, max_p):
             
     return(predictions)
 
-inputs1 = [(smooth_train, smooth_test, smooth_auto, 15)]
-for i in range(3):
-    inputs1.append((detail_train[i], detail_test[i], detail_models[i], 5))
-pool1 = mp.Pool(4)
-results1 = pool1.starmap(arima_train, inputs1)
-pool1.close()
-pool1.join()
+if __name__ == '__main__':
 
-inputs2 = []
-for i in range(3,6):
-    inputs2.append((detail_train[i], detail_test[i], detail_models[i], 5))
-pool2 = mp.Pool(3)
-results2 = pool2.starmap(arima_train, inputs2)
-pool2.close()
-pool2.join()
+    inputs1 = [(smooth_train, smooth_test, smooth_auto, 15)]
+    for i in range(3):
+        inputs1.append((detail_train[i], detail_test[i], detail_models[i], 5))
+    pool1 = mp.Pool(4)
+    results1 = pool1.starmap(arima_train, inputs1)
+    pool1.close()
+    pool1.join()
 
-pred = np.array(results1[0])
-for i in range(1,4):
-    pred += np.array(results1[i])
-for i in range(0,3):
-    pred += np.array(results2[i])
+    inputs2 = []
+    for i in range(3,6):
+        inputs2.append((detail_train[i], detail_test[i], detail_models[i], 5))
+    pool2 = mp.Pool(3)
+    results2 = pool2.starmap(arima_train, inputs2)
+    pool2.close()
+    pool2.join()
 
-np.save('./pred1.npy', pred)
+    pred = np.array(results1[0])
+    for i in range(1,4):
+        pred += np.array(results1[i])
+    for i in range(0,3):
+        pred += np.array(results2[i])
 
-stop = time.time()
+    np.save('./pred1.npy', pred)
 
-print("Total Time: " + str((stop-start)/60) + " minutes")
+    stop = time.time()
 
-actual = test
+    print("Total Time: " + str((stop-start)/60) + " minutes")
 
-plt.plot(pred, color='r')
-plt.plot(actual, color='g')
-plt.savefig('./arima818.png')
+    actual = test
 
-def mean_absolute_percentage_error(y_true, y_pred): 
-    mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
-    return(mape)
+    plt.plot(pred, color='r')
+    plt.plot(actual, color='g')
+    plt.savefig('./arima818.png')
 
-mse = mean_squared_error(actual, pred)
-rmse = math.sqrt(mse)
-mae = mean_absolute_error(actual, pred)
-mape = mean_absolute_percentage_error(actual, pred)
-with open("./results.txt","w") as f:
-    f.write("mse, rmse, mae, mape:" + str((mse,rmse,mae,mape)))
-print("mse, rmse, mae, mape:" + str((mse,rmse,mae,mape)))
+    def mean_absolute_percentage_error(y_true, y_pred): 
+        mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+        return(mape)
+
+    mse = mean_squared_error(actual, pred)
+    rmse = math.sqrt(mse)
+    mae = mean_absolute_error(actual, pred)
+    mape = mean_absolute_percentage_error(actual, pred)
+    with open("./results.txt","w") as f:
+        f.write("mse, rmse, mae, mape:" + str((mse,rmse,mae,mape)))
+    print("mse, rmse, mae, mape:" + str((mse,rmse,mae,mape)))
 
