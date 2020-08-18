@@ -13,7 +13,6 @@ import math
 import time
 import multiprocessing as mp
 from multiprocessing import set_start_method
-set_start_method("spawn")
 
 start = time.time()
 
@@ -77,14 +76,16 @@ for i in range(3):
     inputs1.append((detail_train[i], detail_test[i], detail_models[i], 5))
 pool1 = mp.Pool(4)
 results1 = pool1.starmap(arima_train, inputs1)
-pool1.terminate()
+pool1.close()
+pool1.join()
 
 inputs2 = []
 for i in range(3,6):
     inputs2.append((detail_train[i], detail_test[i], detail_models[i], 5))
 pool2 = mp.Pool(3)
 results2 = pool2.starmap(arima_train, inputs2)
-pool2.terminate()
+pool2.close()
+pool2.join()
 
 pred = np.array(results1[0])
 for i in range(1,4):
