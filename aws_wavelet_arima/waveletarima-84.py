@@ -70,17 +70,17 @@ def arima_train(train, test, arima, max_p):
             
     return(predictions)
 
-pool1 = mp.Pool(4)
 inputs1 = [(smooth_train, smooth_test, smooth_auto, 15)]
 for i in range(3):
     inputs1.append((detail_train[i], detail_test[i], detail_models[i], 5))
+pool1 = mp.Pool(4)
 results1 = pool1.starmap(arima_train, inputs1)
 pool1.terminate()
 
-pool2 = mp.Pool(3)
 inputs2 = []
 for i in range(3,6):
     inputs2.append((detail_train[i], detail_test[i], detail_models[i], 5))
+pool2 = mp.Pool(3)
 results2 = pool2.starmap(arima_train, inputs2)
 pool2.terminate()
 
