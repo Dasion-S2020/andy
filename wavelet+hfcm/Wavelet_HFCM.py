@@ -124,7 +124,7 @@ def HFCM_ridge(dataset1, ratio=0.7, plot_flag=False):
     len_test_data = len(test_data)
     # grid search
     # best parameters
-    validation_ratio = 0.1
+    validation_ratio = 0.2
     len_validation_data = int(len_train_data * validation_ratio)
 
     small_alpha = np.linspace(1e-15, 0.1, 20)
